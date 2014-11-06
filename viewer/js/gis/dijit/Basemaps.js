@@ -18,23 +18,25 @@ define([
     return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
         templateString: template,
         widgetsInTemplate: true,
-        mode: 'agol',
+        mode: 'custom',
         title: 'Basemaps',
         //baseClass: 'gis_Basemaps_Dijit',
         //buttonClass: 'gis_Basemaps_Button',
         //menuClass: 'gis_Basemaps_Menu',
-        mapStartBasemap: 'streets',
-        basemapsToShow: ['streets', 'satellite', 'hybrid', 'topo', 'gray', 'oceans', 'national-geographic', 'osm'],
+        mapStartBasemap: 'barents',
+        basemapsToShow: ['streets','satellite', 'barents'],
         validBasemaps: [],
         postCreate: function () {
             this.inherited(arguments);
             this.currentBasemap = this.mapStartBasemap || null;
+            console.log(this.map);
 
             if (this.mode === 'custom') {
                 this.gallery = new BasemapGallery({
                     map: this.map,
                     showArcGISBasemaps: false,
                     basemaps: functional.map(this.basemaps, function (map) {
+                      console.log(map.basemap);
                         return map.basemap;
                     })
                 });

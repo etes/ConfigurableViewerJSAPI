@@ -10,7 +10,7 @@ define([
 	esriConfig.defaults.io.proxyUrl = 'proxy/proxy.ashx';
 	esriConfig.defaults.io.alwaysUseProxy = false;
 	// url to your geometry server.
-	esriConfig.defaults.geometryService = new GeometryService('http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer');
+	esriConfig.defaults.geometryService = new GeometryService('http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer');
 
 	//image parameters for dynamic services, set to png32 for higher quality exports.
 	var imageParameters = new ImageParameters();
@@ -23,11 +23,32 @@ define([
 		//default mapClick mode, mapClickMode lets widgets know what mode the map is in to avoid multipult map click actions from taking place (ie identify while drawing).
 		defaultMapClickMode: 'identify',
 		// map options, passed to map constructor. see: https://developers.arcgis.com/javascript/jsapi/map-amd.html#map1
-		mapOptions: {
+		/*mapOptions: {
 			basemap: 'streets',
 			center: [-96.59179687497497, 39.09596293629694],
 			zoom: 5,
 			sliderStyle: 'small'
+		},*/
+		mapOptions: {
+        //basemap: 'barents',
+				logo: false,
+        extent: new Extent({
+          xmin:-173159.3372224797,
+          ymin:7864422.526051709,
+          xmax:1434826.4745111547,
+          ymax:8896196.684665617,
+          spatialReference:{wkid:32637}})
+		},
+		initialExtent: {
+				xmin:-173159.3372224797,
+				ymin:7864422.526051709,
+				xmax:1434826.4745111547,
+				ymax:8896196.684665617,
+				spatialReference:{wkid:32637}
+		},
+		// url to your geometry server.
+		geometryService: {
+			url: 'http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer'
 		},
 		// panes: {
 		// 	left: {
@@ -74,7 +95,7 @@ define([
 			editorLayerInfos: {
 				disableGeometryUpdate: false
 			}
-		}, {
+		}, /*{
 			type: 'feature',
 			url: 'http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/SanFrancisco/311Incidents/FeatureServer/0',
 			title: 'San Francisco 311 Incidents',
@@ -85,12 +106,12 @@ define([
 				outFields: ['req_type', 'req_date', 'req_time', 'address', 'district'],
 				mode: 0
 			}
-		}, {
+		},*/ {
 			type: 'dynamic',
-			url: 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/PublicSafety/PublicSafetyOperationalLayers/MapServer',
-			title: 'Louisville Public Safety',
+			url: 'http://geodata.npolar.no/arcgis/rest/services/Barentsportal/EnvironmentalManagement/MapServer',
+			title: 'Environmental Management',
 			options: {
-				id: 'louisvillePubSafety',
+				id: 'environmentalManagement',
 				opacity: 1.0,
 				visible: true,
 				imageParameters: imageParameters
@@ -100,10 +121,10 @@ define([
 			}
 		}, {
 			type: 'dynamic',
-			url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/DamageAssessment/MapServer',
-			title: 'Damage Assessment',
+			url: 'http://geodata.npolar.no/arcgis/rest/services/Barentsportal/Glaciers/MapServer',
+			title: 'Glaciers',
 			options: {
-				id: 'DamageAssessment',
+				id: 'glaciers',
 				opacity: 1.0,
 				visible: true,
 				imageParameters: imageParameters
