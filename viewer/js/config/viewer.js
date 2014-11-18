@@ -96,9 +96,37 @@ define([
 			editorLayerInfos: {
 				disableGeometryUpdate: false
 			}
-		},*/ {
+		},*/{
 			type: 'dynamic',
-			url: 'http://willem.npolar.no/arcgis/rest/services/Barentsportal/HumanActivities/MapServer',
+			url: 'http://geodata.npolar.no/arcgis/rest/services/Barentsportal/Biodiversity/MapServer',
+			title: 'Biodiversity',
+			options: {
+				id: 'biodiversity',
+				opacity: 1.0,
+				visible: true,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				swipe: true,
+				metadataUrl: true
+			}
+		},{
+			type: 'dynamic',
+			url: 'http://geodata.npolar.no/arcgis/rest/services/Barentsportal/Pollution/MapServer',
+			title: 'Pollution',
+			options: {
+				id: 'pollution',
+				opacity: 1.0,
+				visible: true,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				swipe: true,
+				metadataUrl: true
+			}
+		}, {
+			type: 'dynamic',
+			url: 'http://geodata.npolar.no/arcgis/rest/services/Barentsportal/HumanActivities/MapServer',
 			title: 'Human Activities',
 			options: {
 				id: 'humanactivities',
@@ -110,7 +138,7 @@ define([
 				swipe: true,
 				metadataUrl: true
 			}
-		},{
+		}, {
 			type: 'dynamic',
 			url: 'http://willem.npolar.no/arcgis/rest/services/Barentsportal/Oceanography/MapServer',
 			title: 'Oceanography',
