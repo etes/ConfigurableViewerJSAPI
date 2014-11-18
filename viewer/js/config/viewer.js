@@ -25,12 +25,12 @@ define([
 		// map options, passed to map constructor. see: https://developers.arcgis.com/javascript/jsapi/map-amd.html#map1
 		/*mapOptions: {
 			basemap: 'streets',
-			center: [-96.59179687497497, 39.09596293629694],
+			center: [15.59179687497497, 78.09596293629694],
 			zoom: 5,
 			sliderStyle: 'small'
 		},*/
 		mapOptions: {
-        //basemap: 'barents',
+        //basemap: 'topography',
 				logo: false,
         extent: new Extent({
           xmin:-173159.3372224797,
@@ -81,12 +81,13 @@ define([
 		// operationalLayers: Array of Layers to load on top of the basemap: valid 'type' options: 'dynamic', 'tiled', 'feature'.
 		// The 'options' object is passed as the layers options for constructor. Title will be used in the legend only. id's must be unique and have no spaces.
 		// 3 'mode' options: MODE_SNAPSHOT = 0, MODE_ONDEMAND = 1, MODE_SELECTION = 2
-		operationalLayers: [{
+		operationalLayers: [
+		/*{
 			type: 'feature',
-			url: 'http://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/MeetUpHomeTowns/FeatureServer/0',
-			title: 'STLJS Meetup Home Towns',
+			url: 'http://geodata.npolar.no/arcgis/rest/services/Barentsportal/EnvironmentalManagement/0',
+			title: 'Editable',
 			options: {
-				id: 'meetupHometowns',
+				id: 'features',
 				opacity: 1.0,
 				visible: true,
 				outFields: ['*'],
@@ -95,29 +96,33 @@ define([
 			editorLayerInfos: {
 				disableGeometryUpdate: false
 			}
-		}, /*{
-			type: 'feature',
-			url: 'http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/SanFrancisco/311Incidents/FeatureServer/0',
-			title: 'San Francisco 311 Incidents',
-			options: {
-				id: 'sf311Incidents',
-				opacity: 1.0,
-				visible: true,
-				outFields: ['req_type', 'req_date', 'req_time', 'address', 'district'],
-				mode: 0
-			}
 		},*/ {
 			type: 'dynamic',
-			url: 'http://geodata.npolar.no/arcgis/rest/services/Barentsportal/EnvironmentalManagement/MapServer',
-			title: 'Environmental Management',
+			url: 'http://willem.npolar.no/arcgis/rest/services/Barentsportal/HumanActivities/MapServer',
+			title: 'Human Activities',
 			options: {
-				id: 'environmentalManagement',
+				id: 'humanactivities',
 				opacity: 1.0,
 				visible: true,
 				imageParameters: imageParameters
 			},
-			identifyLayerInfos: {
-				layerIds: [2, 4, 5, 8, 12, 21]
+			layerControlLayerInfos: {
+				swipe: true,
+				metadataUrl: true
+			}
+		},{
+			type: 'dynamic',
+			url: 'http://willem.npolar.no/arcgis/rest/services/Barentsportal/Oceanography/MapServer',
+			title: 'Oceanography',
+			options: {
+				id: 'oceanography',
+				opacity: 1.0,
+				visible: true,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				swipe: true,
+				metadataUrl: true
 			}
 		}, {
 			type: 'dynamic',
@@ -133,6 +138,23 @@ define([
 				swipe: true,
 				metadataUrl: true
 			}
+		}, {
+			type: 'dynamic',
+			url: 'http://geodata.npolar.no/arcgis/rest/services/Barentsportal/EnvironmentalManagement/MapServer',
+			title: 'Environmental Management',
+			options: {
+				id: 'environmentalManagement',
+				opacity: 1.0,
+				visible: true,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				swipe: true,
+				metadataUrl: true
+			}//,
+			//identifyLayerInfos: {
+			//	layerIds: [2, 4, 5, 8, 12, 21]
+			//}
 		}],
 		// set include:true to load. For titlePane type set position the the desired order in the sidebar
 		widgets: {
@@ -250,13 +272,11 @@ define([
 				options: {
 					map: true,
 					extent: new Extent({
-						xmin: -180,
-						ymin: -85,
-						xmax: 180,
-						ymax: 85,
-						spatialReference: {
-							wkid: 4326
-						}
+							xmin:-173159.3372224797,
+							ymin:7864422.526051709,
+							xmax:1434826.4745111547,
+							ymax:8896196.684665617,
+							spatialReference:{wkid:32637}
 					})
 				}
 			},
@@ -300,7 +320,7 @@ define([
 				options: 'config/bookmarks'
 			},
 			find: {
-				include: true,
+				include: false,
 				id: 'find',
 				type: 'titlePane',
 				canFloat: true,
@@ -360,7 +380,7 @@ define([
 				}
 			},
 			directions: {
-				include: true,
+				include: false,
 				id: 'directions',
 				type: 'titlePane',
 				path: 'gis/dijit/Directions',
@@ -407,7 +427,7 @@ define([
 				}
 			},
 			streetview: {
-				include: true,
+				include: false,
 				id: 'streetview',
 				type: 'titlePane',
 				canFloat: true,

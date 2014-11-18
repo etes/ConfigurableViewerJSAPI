@@ -23,21 +23,19 @@ define([
         //baseClass: 'gis_Basemaps_Dijit',
         //buttonClass: 'gis_Basemaps_Button',
         //menuClass: 'gis_Basemaps_Menu',
-        mapStartBasemap: 'barents',
-        basemapsToShow: ['streets','satellite', 'barents'],
+        mapStartBasemap: 'topography',
+        basemapsToShow: ['topography','satellite'],
         validBasemaps: [],
         postCreate: function () {
             this.inherited(arguments);
             this.currentBasemap = this.mapStartBasemap || null;
-            console.log(this.map);
 
             if (this.mode === 'custom') {
                 this.gallery = new BasemapGallery({
                     map: this.map,
                     showArcGISBasemaps: false,
                     basemaps: functional.map(this.basemaps, function (map) {
-                      console.log(map.basemap);
-                        return map.basemap;
+                        return map;
                     })
                 });
                 // if (this.map.getBasemap() !== this.mapStartBasemap) { //based off the title of custom basemaps in viewer.js config
