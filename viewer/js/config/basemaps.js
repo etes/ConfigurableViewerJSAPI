@@ -37,6 +37,12 @@ define([
                 visible: false,
                 layers: [new BasemapLayer({
                     url: 'http://geodata.npolar.no/arcgis/rest/services/Barentsportal/BaseMap/MapServer',
+                    initialExtent: {
+                      xmin: -1232141.1188576762,
+                      ymin: 7769646.545945273,
+                      xmax: 2213830.504609592,
+                      ymax: 9173026.90027225,
+                      spatialReference:{wkid:32637}},
                     showAttribution: false
                 })]
             })/*,
